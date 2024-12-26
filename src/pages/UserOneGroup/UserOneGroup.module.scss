@@ -1,0 +1,125 @@
+.container {
+  margin: 0rem 8rem;
+}
+
+.selfIntroContainer {
+  display: flex;
+  align-items: top;
+}
+
+.aboutMe {
+  margin-top: 8px;
+}
+
+.avatar {
+  // position:relative;
+  height: 8.5rem;
+  width: 8.5rem;
+  border: solid rgb(187, 187, 187) 1px;
+  border-radius: 100%;
+  margin-left: 1rem;
+  // text-align: center;
+  // line-height: 210px;
+  // background-size: cover;
+  overflow: hidden
+}
+
+.img {
+  position: relative;
+  height: 8.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.introduction {
+  margin-left: 4rem;
+  width: 23rem;
+  overflow-wrap: break-word
+}
+
+.basicInformContainer {
+  margin-left: 2rem;
+}
+
+// .basicInform {
+//   list-style-type: none;
+// }
+
+.btn {
+  margin-left: 8rem;
+  margin-bottom: 0px;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  color: white;
+  background-color: #3c798b;
+  border-radius: 10px;
+}
+
+.bookingContainer {
+  // display: flex;
+  // flex-wrap: wrap;
+  margin-top: 3rem;
+  margin-right: 12rem;
+  margin-left: 12rem;
+  // border: 1px solid red;
+}
+
+.pastBooking {
+  margin-left: 0.3rem;
+}
+
+.bookingTitle,
+.bookingList {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  height: 2.8rem;
+}
+
+.bookingTitle {
+  background-color: #6b6b6b94;
+  margin-bottom: 0.5rem;
+}
+
+.bookingList {
+  background-color: #d6d6d6;
+  margin-bottom: 0.5rem;
+
+}
+
+.bookingItem {
+  margin-left: 0.5rem;
+  width: 20%;
+  font-size: 13px;
+  // border: 1px solid red;
+}
+
+.bookingItemDate {
+  margin-left: 1rem;
+  width: 20%;
+  font-size: 13px;
+  // border: 1px solid orange;
+}
+
+.bookingItemPrice {
+  margin-left: 1rem;
+  width: 20%;
+  font-size: 13px;
+  // border: 1px solid green;
+}
+
+.bookingItemTenant {
+  margin-left: 1rem;
+  width: 20%;
+  font-size: 13px;
+  // border: 1px solid blue;
+}
+
+.bookingItemBeds {
+  margin-left: 1rem;
+  width: 20%;
+  font-size: 11.5px;
+  // border: 1px solid purple;
+}

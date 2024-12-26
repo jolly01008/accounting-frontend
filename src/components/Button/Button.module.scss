@@ -1,0 +1,31 @@
+.button {
+  height: 45px;
+  padding: 6px 0;
+  border-radius: 0.8rem;
+  border: none;
+  font-size: 16px;
+  color: white;
+  background-color: rgb(40, 40, 40);
+  margin: 15px 10px;
+}
+
+.small {
+  width: 64px;
+}
+
+.middle {
+  width: 120px;
+}
+
+.large {
+  margin-top: 16px;
+  height: 46px;
+  width: 356px;
+  font-size: 20px;
+}
+
+.edit {
+  border: none;
+  height: 40px;
+  width: 128px;
+}
