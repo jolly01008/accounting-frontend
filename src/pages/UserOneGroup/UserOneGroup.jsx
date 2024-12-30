@@ -5,6 +5,9 @@ import { getUserOneGroup } from '../../api/user';
 // hook
 import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext.jsx";
+import useRedirectSignIn from "../../utils/Private.jsx"
+
 import Modal from 'react-modal';
 import Swal from 'sweetalert2'
 
@@ -17,6 +20,9 @@ import styles from "./UserOneGroup.module.scss";
 export default function UserOneGroup() {
 
   const { userId, gpId } = useParams();
+  const { isAuthenticated } = useAuth();
+  const redirectSignIn = useRedirectSignIn();
+
   console.log('userId:', userId)
   console.log('gpId:', gpId)
 
@@ -29,24 +35,30 @@ export default function UserOneGroup() {
   const [message, setMessage] = useState('');
   const messageContainerRef = useRef(null);  // 使用 ref 引用 messageContainer (取代document.getElementById)
 
-  // const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  console.log('token :', token)
 
   useEffect(() => {
-    const getUserAsync = async () => {
+    if (!token) { redirectSignIn() }
 
-      try {
-        //後端拿到的資料存到 user
-        const fetchGroup = await getUserOneGroup(userId, gpId);
-        setGpData(fetchGroup.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    // 最後記得執行 getUserAsync 這個function
-    getUserAsync();
+    if (isAuthenticated) {
+      const getUserAsync = async () => {
+        try {
+          //後端拿到的資料存到 user
+          const fetchGroup = await getUserOneGroup(userId, gpId, token);
+          console.log('fetchGroup:', fetchGroup)
+          setGpData(fetchGroup.data);
+          // setUser(fetchGroup.user)
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      // 最後記得執行 getUserAsync 這個function
+      getUserAsync();
+    }
+  }, [userId, gpId, token, isAuthenticated, redirectSignIn]);
 
-  }, [userId, gpId]);
-
+  // console.log('user;', user)
   // 點擊進入聊天室按鈕。於此創建 WebSocket 連接
   const handleJoinRoom = () => {
     const socketInstance = io("http://localhost:3001");

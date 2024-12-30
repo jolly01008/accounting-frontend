@@ -18,6 +18,7 @@ export default function SignInPage() {
   // const { login, isAuthenticated } = useAuth()
   const { login } = useAuth()
   const { isAuthenticated } = useAuth()
+  const [userId, setUserId] = useState(null);  // 新增一個 state 存放 userId
 
   const handleClick = async () => {
 
@@ -33,7 +34,9 @@ export default function SignInPage() {
     const loginResult = await login({
       account, password
     })
-    console.log('loginResult:', loginResult)
+    const loginUserId = loginResult.data.user.id
+    setUserId(loginUserId)
+
     if (loginResult.status === 'success') {
       Swal.fire({
         title: '登入成功',
@@ -57,10 +60,9 @@ export default function SignInPage() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      // navigate('/hostels')
-      navigate('/UserOneGroup')
+      navigate(`/users/${userId}`);
     }
-  }, [navigate, isAuthenticated])
+  }, [navigate, isAuthenticated, userId])
 
   return (
     <div>
