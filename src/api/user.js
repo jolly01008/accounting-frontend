@@ -16,6 +16,19 @@ const baseUrl = 'http://localhost:3001/api';
 //   }
 // }
 
+export const getUserPage = async (userId, token) => {
+  try {
+    const res = await axios.get(`${baseUrl}/users/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+    return res.data
+  } catch (error) {
+    console.error('[Get a user failed]:', error)
+  }
+}
+
 export const getUserOneGroup = async (userId, gpId, token) => {
   try {
     console.log('請求後端API')
@@ -28,6 +41,6 @@ export const getUserOneGroup = async (userId, gpId, token) => {
     );
     return res.data
   } catch (error) {
-    console.error('[Get a hostel failed]:', error)
+    console.error('[Get a group failed]:', error)
   }
 }

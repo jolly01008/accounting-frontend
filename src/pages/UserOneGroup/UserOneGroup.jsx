@@ -42,7 +42,7 @@ export default function UserOneGroup() {
     if (!token) { redirectSignIn() }
 
     if (isAuthenticated) {
-      const getUserAsync = async () => {
+      const getGroupAsync = async () => {
         try {
           //後端拿到的資料存到 user
           const fetchGroup = await getUserOneGroup(userId, gpId, token);
@@ -53,12 +53,12 @@ export default function UserOneGroup() {
           console.error(error);
         }
       };
-      // 最後記得執行 getUserAsync 這個function
-      getUserAsync();
+      // 最後記得執行 getGroupAsync 這個function
+      getGroupAsync();
     }
   }, [userId, gpId, token, isAuthenticated, redirectSignIn]);
 
-  // console.log('user;', user)
+
   // 點擊進入聊天室按鈕。於此創建 WebSocket 連接
   const handleJoinRoom = () => {
     const socketInstance = io("http://localhost:3001");
@@ -129,26 +129,68 @@ export default function UserOneGroup() {
       <div className={styles.container}>
 
         <div className={styles.bookingContainer}>
-          {gpData && <h3>群組名稱 : {gpData.gpName}</h3>}
-          <button className={styles.openChatBtn} onClick={handleJoinRoom}> 傳訊息給對方 </button>
+          {gpData && <p>群組名稱 : {gpData.gpName}</p>}
+          {gpData && <p>群組創建人 : {gpData.gpCreater}</p>}
+          {gpData && gpData.gpMembers && gpData.gpMembers.length > 0 ? (
+            <p>群組成員 : {gpData.gpMembers.join(', ')}</p>
+          ) : <p>沒有群組成員</p>}
 
-          <div className={styles.newBooking}>
-            <h5 className={styles.title} style={{ fontWeight: 'bold' }}>該群組的紀錄項目</h5>
-            <div className={styles.bookingTitle}>
-              <h6 className={styles.bookingItem} style={{ marginTop: '6.5px' }}>項目</h6>
-              <h6 className={styles.bookingItemDate} style={{ marginTop: '6.5px' }}>先付者</h6>
-              <h6 className={styles.bookingItemPrice} style={{ marginTop: '6.5px' }}>欠款者</h6>
-              <h6 className={styles.bookingItemTenant} style={{ marginTop: '6.5px' }}>價格</h6>
-              <h6 className={styles.bookingItemBeds} style={{ marginTop: '6.5px' }}>時間</h6>
-            </div>
-            <div key={'booking.id'} className={styles.bookingList}>
-              <h6 className={styles.bookingItem} style={{ marginTop: '6.5px' }}>機票錢</h6>
-              <h6 className={styles.bookingItemDate} style={{ marginTop: '6.5px' }}>AAA</h6>
-              <h6 className={styles.bookingItemPrice} style={{ marginTop: '6.5px' }}>BBB</h6>
-              <h6 className={styles.bookingItemTenant} style={{ marginTop: '6.5px' }}>$ 14000</h6>
-              <h6 className={styles.bookingItemBeds} style={{ marginTop: '6.5px' }}>$ 14000</h6>
-            </div>
-          </div>
+          {/* <button className={styles.openChatBtn} onClick={handleJoinRoom} style={{ marginBottom: '6.5px' }} > 傳訊息給對方 </button>
+          <button className={styles.openChatBtn} style={{ marginLeft: '6.5px' }} > 增加一筆紀錄 </button>
+          <button className={styles.openChatBtn} style={{ marginLeft: '6.5px' }} > 結算全部 </button> */}
+
+          <button className={styles.openChatBtn} onClick={handleJoinRoom} style={{ marginBottom: '6.5px' }} > 傳訊息給對方 </button>
+          <button className={styles.openChatBtn} style={{ marginLeft: '6.5px' }} > 增加一筆紀錄 </button>
+          <button className={styles.openChatBtn} style={{ marginLeft: '6.5px' }} > 結算全部 </button>
+
+          {gpData && gpData.gpRecord && gpData.gpRecord.length > 0 ? (
+            <>
+              <div className={styles.accountingTitle}>
+                <h6 className={styles.item}>項目</h6>
+                <h6 className={styles.lender}>先付者</h6>
+                <h6 className={styles.borrower}>欠款者</h6>
+                <h6 className={styles.price}>價格</h6>
+                <h6 className={styles.time}>時間</h6>
+              </div>
+              {gpData.gpRecord.map(record => (
+                <div className={styles.newBooking} key={record._id}>
+                  <div className={styles.accountingList}>
+                    <h6 className={styles.item}>{record.item}</h6>
+                    <h6 className={styles.lender}>{record.lender}</h6>
+                    <h6 className={styles.borrower}>{record.borrower}</h6>
+                    <h6 className={styles.price}>{record.price}</h6>
+                    <h6 className={styles.time}>{new Date(record.time).toLocaleString()}</h6>
+                  </div>
+                </div>
+              )
+              )}
+            </>
+          ) :
+            <p> 目前沒有任何記帳紀錄 </p>}
+          {/* {gpData && gpData.gpRecord && gpData.gpRecord.length > 0 ? (
+            <>
+              <div className={styles.bookingTitle}>
+                <h6 className={styles.bookingItem}>項目</h6>
+                <h6 className={styles.bookingItemDate}>先付者</h6>
+                <h6 className={styles.bookingItemPrice}>欠款者</h6>
+                <h6 className={styles.bookingItemTenant}>價格</h6>
+                <h6 className={styles.bookingItemBeds}>時間</h6>
+              </div>
+              {gpData.gpRecord.map(record => (
+                <div className={styles.newBooking} key={record._id}>
+                  <div className={styles.bookingList}>
+                    <h6 className={styles.bookingItem}>{record.item}</h6>
+                    <h6 className={styles.bookingItemDate}>{record.lender}</h6>
+                    <h6 className={styles.bookingItemPrice}>{record.borrower}</h6>
+                    <h6 className={styles.bookingItemTenant}>{record.price}</h6>
+                    <h6 className={styles.bookingItemBeds}>{new Date(record.time).toLocaleString()}</h6>
+                  </div>
+                </div>
+              )
+              )}
+            </>
+          ) :
+            <p> 目前沒有任何記帳紀錄 </p>} */}
         </div>
 
         <Modal
@@ -205,6 +247,32 @@ export default function UserOneGroup() {
         </div> */}
         </div>
       </div>
-    </div>
+    </div >
   )
 }
+
+// {
+//   gpData && gpData.gpRecord && gpData.gpRecord.length > 0 ? (
+//     gpData.gpRecord.map(record => {
+//       return (
+//         <div className={styles.newBooking}>
+//           <div className={styles.bookingTitle}>
+//             <h6 className={styles.bookingItem} style={{ marginTop: '6.5px' }}>項目</h6>
+//             <h6 className={styles.bookingItemDate} style={{ marginTop: '6.5px' }}>先付者</h6>
+//             <h6 className={styles.bookingItemPrice} style={{ marginTop: '6.5px' }}>欠款者</h6>
+//             <h6 className={styles.bookingItemTenant} style={{ marginTop: '6.5px' }}>價格</h6>
+//             <h6 className={styles.bookingItemBeds} style={{ marginTop: '6.5px' }}>時間</h6>
+//           </div>
+//           <div className={styles.bookingList}>
+//             <h6 className={styles.bookingItem} style={{ marginTop: '6.5px' }}>機票錢</h6>
+//             <h6 className={styles.bookingItemDate} style={{ marginTop: '6.5px' }}>{record.lender}</h6>
+//             <h6 className={styles.bookingItemPrice} style={{ marginTop: '6.5px' }}>{record.borrower}</h6>
+//             <h6 className={styles.bookingItemTenant} style={{ marginTop: '6.5px' }}>{record.price}</h6>
+//             <h6 className={styles.bookingItemBeds} style={{ marginTop: '6.5px' }}>{record.time}</h6>
+//           </div>
+//         </div>
+//       );
+//     })
+//   ) :
+//   <p>No records available.</p>
+// }

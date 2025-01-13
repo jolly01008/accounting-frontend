@@ -5,6 +5,7 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage.jsx";
 import UserOneGroup from "./pages/UserOneGroup/UserOneGroup.jsx";
 import { AuthProvider } from './contexts/AuthContext.jsx';
+import UserPage from './pages/UserPage/UserPage.jsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="users">
               {/* <Route index element={<UserPage />} /> */}
               <Route path=":userId/groups/:gpId" element={<UserOneGroup />} />
+              <Route path=":userId" element={<UserPage />} />
             </Route>
           </Routes>
         </AuthProvider>

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { useEffect } from "react";
 import * as jwt from "jsonwebtoken"
 import { useNavigate } from "react-router-dom";
@@ -28,14 +28,14 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // 儲存TOKEN不讓頁面在重新整理時讀不到
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     const tempPayload = jwt.decode(token)
-  //     setIsAuthenticated(true)
-  //     setPayload(tempPayload)
-  //   }
-  // }, [])
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const tempPayload = jwt.decode(token)
+      setIsAuthenticated(true)
+      setPayload(tempPayload)
+    }
+  }, [])
 
   return (
     <AuthContext.Provider
