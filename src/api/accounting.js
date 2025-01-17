@@ -22,3 +22,20 @@ export const postRecord = async (userId, gpId, newRecord, token) => {
     throw error;
   }
 };
+
+export const deleteRecord = async (userId, gpId, btnRecordId, token) => {
+  try {
+    const response = await axios.delete(`${baseURL}/accounting/${userId}/${gpId}/${btnRecordId}/deleteRecord`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    return response;
+
+  } catch (error) {
+    console.log("deleteRecord  is Fail", error);
+    throw error;
+  }
+};

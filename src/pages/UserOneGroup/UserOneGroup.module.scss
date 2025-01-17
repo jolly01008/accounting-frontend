@@ -124,6 +124,20 @@
   // border: 1px solid purple;
 }
 
+.edit {
+  margin-left: 1rem;
+  width: 5%;
+  font-size: 11.5px;
+  // border: 1px solid purple;
+}
+
+.delete {
+  margin-left: 1rem;
+  width: 5%;
+  font-size: 11.5px;
+  // border: 1px solid purple;
+}
+
 // ============ 聊天 Modal =============
 
 /* 背景遮罩層 */
@@ -244,3 +258,152 @@
   margin-bottom: 1rem;
   border: 1px solid rgb(36, 97, 112)
 }
+
+
+// ----------------------------------- GPT 適用於手機 -----------------------------------
+
+// /* Global styles for mobile devices */
+// @media (max-width: 768px) {
+
+//   .container {
+//     margin: 0 1rem; // 縮小左右邊距
+//   }
+
+//   .bookingContainer {
+//     margin-top: 2rem;
+//     margin-right: 1rem;
+//     margin-left: 1rem;
+//   }
+
+//   .accountingTitle,
+//   .accountingList {
+//     display: block; // 改成塊狀顯示，讓每個項目垂直排列
+//     width: 100%; // 塞滿螢幕寬度
+//     justify-content: flex-start;
+//   }
+
+//   .accountingTitle {
+//     background-color: #6b6b6b94;
+//     margin-bottom: 0.2rem;
+//     padding: 0.5rem;
+//     font-size: 12px;
+//   }
+
+//   .accountingList {
+//     background-color: #d6d6d6;
+//     margin-bottom: 0.2rem;
+//     padding: 0.5rem;
+//     font-size: 12px;
+//   }
+
+//   .item,
+//   .lender,
+//   .borrower,
+//   .price,
+//   .time,
+//   .edit,
+//   .delete {
+//     margin-left: 0.5rem;
+//     margin-bottom: 0.5rem; // 增加間距，讓內容不擠在一起
+//     width: 100%; // 每個項目佔滿一行
+//     font-size: 12px; // 減小字型大小
+//   }
+
+//   .item {
+//     width: 100%;
+//   }
+
+//   .lender,
+//   .borrower,
+//   .price {
+//     width: 100%;
+//   }
+
+//   .price {
+//     font-size: 14px;
+//   }
+
+//   .time {
+//     font-size: 12px;
+//   }
+
+//   .edit,
+//   .delete {
+//     width: 48%; // 左右各佔一小部分
+//     margin-top: 0.5rem;
+//   }
+
+//   /* Button styles */
+//   .openChatBtn,
+//   .sendBtn {
+//     font-size: 14px;
+//     padding: 8px 15px;
+//     margin: 10px 0;
+//     width: 100%; // 按鈕寬度100%，讓它佔滿整行
+//   }
+
+//   /* Input fields */
+//   .inputRow {
+//     width: 100%; // 讓輸入框佔滿整行
+//     margin-bottom: 1rem;
+//   }
+
+//   .messageInput {
+//     width: 100%;
+//     padding: 12px;
+//     font-size: 14px;
+//   }
+
+//   .chatModal {
+//     max-width: 100%;
+//     margin-top: 3rem;
+//     padding: 20px;
+//   }
+
+//   .chatHeader {
+//     font-size: 1rem;
+//     justify-content: center; // 調整標題居中顯示
+//     margin-bottom: 15px;
+//   }
+
+//   .closeBtn {
+//     font-size: 1.2rem;
+//   }
+// }
+
+// /* For very small screens */
+// @media (max-width: 480px) {
+
+//   .container {
+//     margin: 0 0.5rem;
+//   }
+
+//   .accountingTitle,
+//   .accountingList {
+//     font-size: 11px; // 更小的字型
+//   }
+
+//   .item,
+//   .lender,
+//   .borrower,
+//   .price,
+//   .time,
+//   .edit,
+//   .delete {
+//     font-size: 10px; // 更小的字型
+//   }
+
+//   .openChatBtn,
+//   .sendBtn {
+//     font-size: 12px;
+//     padding: 8px 10px;
+//   }
+
+//   .inputRow {
+//     font-size: 12px;
+//   }
+
+//   .messageInput {
+//     font-size: 12px;
+//   }
+// }

@@ -19,6 +19,7 @@ import styles from "./UserOneGroup.module.scss";
 
 // api
 import { postRecord } from "../../api/accounting.js";
+import { deleteRecord } from "../../api/accounting.js";
 
 export default function UserOneGroup() {
 
@@ -164,6 +165,32 @@ export default function UserOneGroup() {
     }
   };
 
+  // 刪除一筆紀錄用
+  const handleDeleteRecord = async (btnRecordId) => {
+    try {
+      const { data } = await deleteRecord(userId, gpId, btnRecordId, token);
+
+      if (data.status === "success" && data.message === "已刪除該筆紀錄") {
+        Swal.fire({
+          title: "成功刪除紀錄",
+          timer: 2100,
+          icon: "success",
+          showConfirmButton: false,
+        })
+      } else {
+        Swal.fire({
+          title: "刪除紀錄失敗",
+          text: "出了一點錯誤",
+          timer: 2100,
+          icon: "warning",
+          showConfirmButton: false,
+        })
+      }
+    } catch (error) {
+      console.error("刪除紀錄時出錯:", error);
+    }
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -240,6 +267,8 @@ export default function UserOneGroup() {
                 <h6 className={styles.borrower}>欠款者</h6>
                 <h6 className={styles.price}>價格</h6>
                 <h6 className={styles.time}>時間</h6>
+                <h6 className={styles.edit}> 編輯 </h6>
+                <h6 className={styles.delete}> 刪除 </h6>
               </div>
               {gpData.gpRecord.map(record => (
                 <div className={styles.newBooking} key={record._id}>
@@ -249,6 +278,8 @@ export default function UserOneGroup() {
                     <h6 className={styles.borrower}>{record.borrower}</h6>
                     <h6 className={styles.price}>{record.price}</h6>
                     <h6 className={styles.time}>{new Date(record.time).toLocaleDateString()}</h6>
+                    <button className={styles.edit}> 編輯 </button>
+                    <button className={styles.delete} onClick={() => handleDeleteRecord(record._id)} > 刪除 </button>
                   </div>
                 </div>
               )
