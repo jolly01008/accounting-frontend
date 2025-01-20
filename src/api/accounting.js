@@ -39,3 +39,29 @@ export const deleteRecord = async (userId, gpId, btnRecordId, token) => {
     throw error;
   }
 };
+export const putRecord = async (userId, gpId, btnRecordId, updatedRecord, token) => {
+  try {
+    const response = await axios.put(`${baseURL}/accounting/${userId}/${gpId}/${btnRecordId}/putRecord`,
+      {
+        item: updatedRecord.item,
+        lender: updatedRecord.lender,
+        borrower: updatedRecord.borrower,
+        price: updatedRecord.price,
+        time: updatedRecord.time,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const { data } = response;
+    return data;
+
+  } catch (error) {
+    console.log("putRecord is Fail", error);
+    throw error;
+  }
+};

@@ -20,6 +20,7 @@ import styles from "./UserOneGroup.module.scss";
 // api
 import { postRecord } from "../../api/accounting.js";
 import { deleteRecord } from "../../api/accounting.js";
+import { putRecord } from "../../api/accounting.js";
 
 export default function UserOneGroup() {
 
@@ -191,6 +192,59 @@ export default function UserOneGroup() {
     }
   };
 
+  // 編輯一筆紀錄用
+  const [isEditing, setIsEditing] = useState(false);  // 控制是否顯示編輯表單
+  const [editRecord, setEditRecord] = useState(null);  // 存儲要編輯的紀錄
+
+  const putOneRecord = (btnRecordId) => {
+    // 查找要編輯的紀錄
+    const recordToEdit = gpData.gpRecord.find(record => record._id === btnRecordId);
+
+    if (recordToEdit) {
+      // 將該紀錄的內容放到表單
+      setItem(recordToEdit.item);
+      setLender(recordToEdit.lender);
+      setBorrower(recordToEdit.borrower);
+      setPrice(recordToEdit.price);
+      setTime(dayjs(recordToEdit.time).format('YYYY/M/D'));
+
+      // 顯示編輯表單
+      setEditRecord(recordToEdit);  // 儲存當前要編輯的紀錄
+      setIsEditing(true);  // 顯示編輯表單
+    }
+  };
+
+  // 更新紀錄
+  const handleUpdateRecord = async () => {
+    const updatedRecord = {
+      item,
+      lender,
+      borrower,
+      price,
+      time
+    };
+
+    try {
+      const response = await putRecord(userId, gpId, editRecord._id, updatedRecord, token);
+
+      if (response.status === "success") {
+        // 更新成功後清空狀態並關閉編輯表單
+        setIsEditing(false);
+        setEditRecord(null);
+      } else {
+        console.error('更新紀錄失敗');
+      }
+    } catch (error) {
+      console.error('更新紀錄時發生錯誤:', error);
+    }
+  };
+
+  // 取消編輯
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditRecord(null);
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -278,7 +332,7 @@ export default function UserOneGroup() {
                     <h6 className={styles.borrower}>{record.borrower}</h6>
                     <h6 className={styles.price}>{record.price}</h6>
                     <h6 className={styles.time}>{new Date(record.time).toLocaleDateString()}</h6>
-                    <button className={styles.edit}> 編輯 </button>
+                    <button className={styles.edit} onClick={() => putOneRecord(record._id)}> 編輯 </button>
                     <button className={styles.delete} onClick={() => handleDeleteRecord(record._id)} > 刪除 </button>
                   </div>
                 </div>
@@ -314,6 +368,56 @@ export default function UserOneGroup() {
             <button className={styles.closeBtn} onClick={handleCloseChat}>結束對話</button>
           </div>
 
+        </Modal>
+
+        <Modal
+          isOpen={isEditing}  // 控制Modal顯示與隱藏
+          contentLabel="Edit Record"
+          className={styles.chatModal}
+          overlayClassName={styles.chatOverlay}
+        >
+          <h2>編輯紀錄</h2>
+          <div className={styles.editForm}>
+            <input
+              className={styles.inputRow}
+              type="text"
+              placeholder="項目名稱"
+              value={item}
+              onChange={(e) => setItem(e.target.value)}
+            />
+            <input
+              className={styles.inputRow}
+              type="text"
+              placeholder="借出者"
+              value={lender}
+              onChange={(e) => setLender(e.target.value)}
+            />
+            <input
+              className={styles.inputRow}
+              type="text"
+              placeholder="欠款者"
+              value={borrower}
+              onChange={(e) => setBorrower(e.target.value)}
+            />
+            <input
+              className={styles.inputRow}
+              type="text"
+              placeholder="價格"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <input
+              className={styles.inputRow}
+              type="text"
+              placeholder="時間"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+            />
+            <div className={styles.buttons}>
+              <button onClick={handleUpdateRecord} className={styles.saveBtn}>更新紀錄</button>
+              <button onClick={handleCancelEdit} className={styles.cancelBtn}>取消</button>
+            </div>
+          </div>
         </Modal>
 
       </div>
