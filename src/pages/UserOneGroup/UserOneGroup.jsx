@@ -21,6 +21,7 @@ import styles from "./UserOneGroup.module.scss";
 import { postRecord } from "../../api/accounting.js";
 import { deleteRecord } from "../../api/accounting.js";
 import { putRecord } from "../../api/accounting.js";
+import { countRecord } from "../../api/accounting.js";
 
 export default function UserOneGroup() {
 
@@ -245,6 +246,19 @@ export default function UserOneGroup() {
     setEditRecord(null);
   };
 
+  // 結算全部
+  const [result, setResult] = useState('');
+
+  const handleCalculate = async () => {
+    try {
+      const response = await countRecord(userId, gpId, token);
+
+      setResult(response.data.result);
+    } catch (error) {
+      console.error('Error calculating the record:', error);
+    }
+  };
+
   return (
     <div>
       <div className={styles.container}>
@@ -257,7 +271,13 @@ export default function UserOneGroup() {
           ) : <p>沒有群組成員</p>}
 
           <button className={styles.openChatBtn} onClick={handleJoinRoom} style={{ marginBottom: '6.5px' }} > 傳訊息給對方 </button>
-          <button className={styles.openChatBtn} style={{ marginLeft: '6.5px' }} > 結算全部 </button>
+          <button className={styles.openChatBtn} onClick={handleCalculate} style={{ marginLeft: '6.5px' }} > 結算全部 </button>
+
+          {result != null ? (
+            <div>
+              <p>{result}</p>
+            </div>
+          ) : ''}
 
           <div>
             <input

@@ -65,3 +65,26 @@ export const putRecord = async (userId, gpId, btnRecordId, updatedRecord, token)
     throw error;
   }
 };
+
+export const countRecord = async (userId, gpId, token) => {
+
+  try {
+    console.log('-- countRecord  api response --')
+    const response = await axios.post(`${baseURL}/accounting/${userId}/${gpId}/countRecord`,
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json', // 設定請求的 Content-Type 為 JSON
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    const { data } = response;
+    console.log('-- countRecord  api response --:', response)
+    return data;
+
+  } catch (error) {
+    console.log("countRecord  is Fail", error);
+    throw error;
+  }
+};
