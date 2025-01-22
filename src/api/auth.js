@@ -4,8 +4,6 @@ const authURL = 'http://localhost:3001/api'
 
 export const login = async ({ account, password }) => {
   try {
-    console.log('打後端API的account:', account)
-    console.log('打後端API的password:', password)
     const { data } = await axios.post(`${authURL}/users/login`, {
       account,
       password

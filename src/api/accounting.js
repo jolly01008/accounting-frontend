@@ -69,7 +69,6 @@ export const putRecord = async (userId, gpId, btnRecordId, updatedRecord, token)
 export const countRecord = async (userId, gpId, token) => {
 
   try {
-    console.log('-- countRecord  api response --')
     const response = await axios.post(`${baseURL}/accounting/${userId}/${gpId}/countRecord`,
       {},
       {
@@ -80,7 +79,6 @@ export const countRecord = async (userId, gpId, token) => {
       }
     );
     const { data } = response;
-    console.log('-- countRecord  api response --:', response)
     return data;
 
   } catch (error) {

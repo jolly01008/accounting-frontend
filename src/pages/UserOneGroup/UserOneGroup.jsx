@@ -50,11 +50,9 @@ export default function UserOneGroup() {
     if (isAuthenticated) {
       const getGroupAsync = async () => {
         try {
-          //後端拿到的資料存到 user
           const fetchGroup = await getUserOneGroup(userId, gpId, token);
           console.log('fetchGroup:', fetchGroup)
           setGpData(fetchGroup.data);
-          // setUser(fetchGroup.user)
         } catch (error) {
           console.error(error);
         }
