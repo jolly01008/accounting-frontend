@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // api
 import { login } from "../api/auth"
-// import { register } from "../api/auth"
-// import { getUserInfo, getLandlordInfo, switchRole } from "../api/setting"
-// import { postApplyLandlord } from "../api/user";
+import { register } from "../api/auth"
 import Swal from 'sweetalert2'
 
 // 定義 context 內容
@@ -49,16 +47,16 @@ export const AuthProvider = ({ children }) => {
           currentRole: payload.currentRole,
           landlordId: payload.Landlord ? payload.Landlord.id : null
         },
-        // register: async (data) => {
-        //   // 呼叫register function(向後端請求註冊的api)
-        //   const success = await register({
-        //     name: data.name,
-        //     email: data.email,
-        //     password: data.password,
-        //     confirmPassword: data.confirmPassword,
-        //   });
-        //   return success;
-        // },
+        register: async (data) => {
+          // 呼叫register function(向後端請求註冊的api)
+          const success = await register({
+            name: data.name,
+            account: data.account,
+            password: data.password,
+            checkPassword: data.checkPassword,
+          });
+          return success;
+        },
         login: async (userInputData) => {
           const loginResult = await login({
             account: userInputData.account,
@@ -76,23 +74,7 @@ export const AuthProvider = ({ children }) => {
             setIsAuthenticated(false);
           }
           console.log('tempPayload:', tempPayload)
-          // ====================================================
-          // 呼叫login function(向後端請求登入的api)抽取到這邊。hostel專案的原本寫法。
-          // const { success, token, user } = await login({
-          //   email: data.email,
-          //   password: data.password
-          // })
-          // const tempPayload = jwt.decode(token) //取得的token用jwt解析
-          // if (tempPayload) {
-          //   setPayload(tempPayload);
-          //   setIsAuthenticated(true);
-          //   localStorage.setItem("token", token);
-          //   // localStorage.setItem("role", user.role);
-          //   // localStorage.setItem("currentRole", user.currentRole);
-          // } else {
-          //   setPayload(null);
-          //   setIsAuthenticated(false);
-          // }
+
           return loginResult;
         },
         logout: () => {

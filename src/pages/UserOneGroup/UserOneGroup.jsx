@@ -32,7 +32,6 @@ export default function UserOneGroup() {
   console.log('userId:', userId)
   console.log('gpId:', gpId)
 
-  // const [user, setUser] = useState(null);
   const [gpData, setGpData] = useState(null);
 
   // 聊天相關
