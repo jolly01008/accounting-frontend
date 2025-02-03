@@ -287,25 +287,35 @@ export default function UserOneGroup() {
               required
             />
 
-            <input
+            <select
               className={styles.inputRow}
-              type="text"
               placeholder="借出者"
               value={lender}
               onChange={(e) => setLender(e.target.value)}
               name="lender"
-              required
-            />
+              required>
+              <option value="" disabled>借出者</option>
+              {gpData && gpData.gpMembers && gpData.gpMembers.length > 0 ? (
+                gpData.gpMembers.map((member) => (
+                  <option value={member}>{member}</option>
+                ))
+              ) : <option>無相關成員</option>}
+            </select>
 
-            <input
+            <select
               className={styles.inputRow}
-              type="text"
               placeholder="欠款者"
               value={borrower}
               onChange={(e) => setBorrower(e.target.value)}
               name="borrower"
-              required
-            />
+              required>
+              <option value="" disabled>欠款者</option>
+              {gpData && gpData.gpMembers && gpData.gpMembers.length > 0 ? (
+                gpData.gpMembers.map((member) => (
+                  <option value={member}>{member}</option>
+                ))
+              ) : <option>無相關成員</option>}
+            </select>
 
             <input
               className={styles.inputRow}

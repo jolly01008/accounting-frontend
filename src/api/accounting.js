@@ -2,6 +2,27 @@ import axios from 'axios';
 
 const baseURL = 'http://localhost:3001/api'
 
+export const postGroup = async (userId, groupData, token) => {
+
+  try {
+    const response = await axios.post(`${baseURL}/accounting/${userId}/addGroup`,
+      groupData,
+      {
+        headers: {
+          'Content-Type': 'application/json', // 設定請求的 Content-Type 為 JSON
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    const { data } = response;
+    return data;
+
+  } catch (error) {
+    console.log("postGroup  is Fail", error);
+    throw error;
+  }
+};
+
 export const postRecord = async (userId, gpId, newRecord, token) => {
 
   try {
