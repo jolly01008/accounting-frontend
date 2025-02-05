@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+# 記帳工具 accounting
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 前端技術堆疊
 
-## Available Scripts
+語言與框架：React.js
+數據交換：Axios 用於向後端 API 發送 HTTP 請求並處理響應
+雙向通訊：socket.io-client 實現即時通訊功能
+身份認證：JWT（JSON Web Token）存儲和傳遞身份認證的 Token，確保用戶的認證狀態。
 
-In the project directory, you can run:
+## 專案介紹
 
-### `npm start`
+這是一個能夠幫助用戶，記錄與朋友彼此消費與欠款狀況的記帳工具。
+可以新增、編輯和刪除記錄，根據所有記錄，計算最終的欠款結果。
+用戶可建立群組，群組人數兩人為主，能一同做記帳的項目紀錄。
+支持即時聊天功能，便於雙方即時交流欠款細節。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+適用於想簡單清楚地紀錄管理借款與欠款狀況的用戶，並能夠促進更便捷的溝通。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 功能介紹
 
-### `npm test`
+帳號管理：
+ - 註冊與登入：未登入時，用戶可註冊及登入帳號。登入後，根據用戶帳號展示現有群組及相關功能。
+ - 登出：用戶可隨時登出帳號，退出後無法使用相關功能，直到重新登入。
+群組管理：用戶可以建立群組，並填寫一名用戶加入群組。可將群組頁面連結分享給對方，與對方一起記帳。
+記錄管理：可以新增、編輯和刪除借出、欠款紀錄。
+欠款計算：結算單一群組的全部紀錄，計算最終的欠款金額，顯示誰欠誰多少錢。
+即時聊天：如果雙方都在線，支持實時文字發送聊天訊息，便於討論和協商。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 畫面截圖
 
-### `npm run build`
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image01.png)
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image02.png)
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image03.png)
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image04.png)
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image05.png)
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image06.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 共用帳號
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 第一組 user 帳號
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  - email: user1@example.com
+  - password: 12345678
 
-### `npm run eject`
+- 第二組 user 帳號
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  - email: user2@example.com
+  - password: 12345678
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- 第三組 user 帳號
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  - email: user3@example.com
+  - password: 12345678
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# 安裝及使用
 
-## Learn More
+## 本地基礎設置
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 確認本地端已安裝 Node.js 、 npm
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 搭配後端 repo，作為伺服器
+  <https://github.com/jolly01008/accounting>
 
-### Code Splitting
+## 開始使用
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. 將專案 clone 到本地
 
-### Analyzing the Bundle Size
+2. 開啟終端機(Terminal)，進入存放此專案的資料夾
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
+cd accounting-frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
 
-### Advanced Configuration
+3. 安裝所需套件
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
 
-### Deployment
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
 
-### `npm run build` fails to minify
+4. 安裝完畢，執行程式
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+
+npm start
+
+```
+
+5. 打開瀏覽器進入到以下網址：  
+   http://localhost:3000/signin，共用帳號進行登入  
+   http://localhost:3000/signup，或註冊其他帳號做登入  
+   成功登入後即可開始使用功能
+
+6. 若要暫停使用可以按下鍵盤
+
+```
+
+ctrl + c
+
+```
