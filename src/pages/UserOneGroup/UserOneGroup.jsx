@@ -256,11 +256,42 @@ export default function UserOneGroup() {
     }
   };
 
+  // 複製網址
+  const [isCopied, setIsCopied] = useState(false);
+  const copyURL = () => {
+    if (isCopied) return; // 避免多次觸發
+    try {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url)
+      setIsCopied(true);
+      Swal.fire({
+        title: "已複製網址",
+        timer: 1200,
+        icon: "success",
+        showConfirmButton: false,
+      })
+      setTimeout(() => setIsCopied(false), 3000); // 5秒後允許再次複製
+    } catch (error) {
+      console.error("複製失敗:", error)
+      Swal.fire({
+        title: "複製失敗",
+        timer: 1300,
+        icon: "warning",
+        showConfirmButton: false,
+      })
+    }
+  };
+
   return (
     <div>
       <div className={styles.container}>
 
         <div className={styles.bookingContainer}>
+          <button onClick={copyURL} disabled={isCopied}>
+            {isCopied ? "已複製網址" : `複製網址`}
+          </button>
+          <p style={{ display: "inline-block", color: "gray" }}> &nbsp; 可以複製該群組連結給對方，一同記帳</p>
+
           {gpData && <p>群組名稱 : {gpData.gpName}</p>}
           {gpData && <p>群組創建人 : {gpData.gpCreater}</p>}
           {gpData && gpData.gpMembers && gpData.gpMembers.length > 0 ? (

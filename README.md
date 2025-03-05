@@ -5,7 +5,7 @@
 語言與框架：React.js  
 數據交換：Axios 向後端 API 發送 HTTP 請求並處理響應  
 雙向通訊：socket.io-client 實現即時通訊功能  
-身份認證：JWT（JSON Web Token）存儲和傳遞身份認證的 Token，確保用戶的認證狀態。
+身份認證：JWT（JSON Web Token）存儲和傳遞身份認證的 Token，確保用戶的認證狀態。  
 容器化技術 : Docker
 
 ## 專案介紹
@@ -22,34 +22,45 @@
 - 帳號管理：
   - 註冊與登入：未登入時，用戶可註冊及登入帳號。登入後，根據用戶帳號展示現有群組及相關功能。
   - 登出：用戶可隨時登出帳號，退出後無法使用相關功能，直到重新登入。  
-- 群組管理：用戶可以建立群組，並填寫一名用戶加入群組。可將群組頁面連結分享給對方，與對方一起記帳。  
+- 群組管理：用戶可以建立群組，填寫另一位「用戶名字( name )」以創建群組。可將群組連結分享給對方，與對方一起記帳。  
 - 記錄管理：可以新增、編輯和刪除借出、欠款紀錄。包含項目、價格、時間。  
 - 欠款計算：結算單一群組的全部紀錄，計算最終的欠款金額，顯示誰欠誰多少錢。  
 - 即時聊天：點擊傳訊息給對方，若雙方都在線，支持實時文字發送聊天訊息，便於討論和協商。
 
-## 畫面截圖
+## 畫面截圖與功能演示
 
 ![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image01.png)
+*使用者個人頁面，可以看到創建的群組*
+
 ![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image02.png)
+*新增群組，需填寫另一名使用者的 name*
+
 ![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image03.png)
-![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image04.png)
-![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image05.png)
-![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/image06.png)
+*記帳畫面，點擊結算全部可得知雙方欠款結果*
+
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/gif01.gif)
+*複製分享連結給群組成員，一起編輯記帳*
+
+![image](https://github.com/jolly01008/accounting-frontend/blob/main/public/readmeImage/gif02.gif)
+*點擊傳訊息能上線聊天，都在線時可以即時溝通交流*
 
 ## 共用帳號
 
 - 第一組 user 帳號
 
+  - name: user1
   - email: user1@example.com
   - password: 12345678
 
 - 第二組 user 帳號
 
+  - name: user2
   - email: user2@example.com
   - password: 12345678
 
 - 第三組 user 帳號
 
+  - name: user3
   - email: user3@example.com
   - password: 12345678
 
@@ -66,8 +77,8 @@
 ## 克隆專案並設置資料夾
 1. 創建一個新的資料夾，並進入該資料夾：
 ```
-
 mkdir accounting-project
+
 cd accounting-project
 
 ```
@@ -95,17 +106,17 @@ docker-compose build --no-cache
 
 ```
 
-3. 可檢查是否有成功創建三個 image。 
-
-應該能看到以下鏡像：
-- accounting_mongo:latest
-- accounting:latest
-- accounting-frontend:latest
+3. 可檢查是否有成功創建三個鏡像。 
 ```
 
 docker images 
 
 ```
+
+應該能看到以下鏡像：
+- accounting_mongo:latest
+- accounting:latest
+- accounting-frontend:latest
 
 
 4. 啟動容器。以後台模式啟動所有定義在 docker-compose.yml 中的服務。
@@ -130,10 +141,9 @@ docker container restart [container ID]
 ```
 其中 [container ID] 是容器的 ID，也可以通過 docker container ls -a 查找到。
 
-6. 打開瀏覽器並訪問以下頁面，登入第一組帳號，開始使用
+6. 打開瀏覽器並訪問這個頁面 : <http://localhost:3000/signin> 
 
-<http://localhost:3000/signin>
- 
+可以登入第一組帳號，開始使用
  - email: user1@example.com
  - password: 12345678
 
